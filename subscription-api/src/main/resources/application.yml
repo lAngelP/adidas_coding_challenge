@@ -1,0 +1,31 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+kafka:
+  bootstrap: kafka:9092
+  mailRequestTopic: email_requests
+server:
+  port: 8443
+  http2:
+    enabled: true
+#  ssl:
+#    key-store: /opt/message-receiver-api.p12
+#    key-store-password: message-receiver-api
+#    key-store-type: pkcs12
+#    key-alias: message-receiver-api
+#    key-password: message-receiver-api
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update # WILL BE REMOVED WHEN LIQUIBASE IS RUNNING
+    show-sql: true
+  application:
+    name: "subscription-api"
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/message-receiver-api
+    username: postgres
+    password: postgres

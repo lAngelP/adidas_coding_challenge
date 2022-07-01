@@ -1,0 +1,4 @@
+rootProject.name = 'technical_test'
+include 'subscription-api'
+include 'email-pcs'
+

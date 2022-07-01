@@ -1,0 +1,34 @@
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: kafka:9092
+      function:
+        bindings:
+          process-in-0: email_requests
+      #  bindings:
+      #    input:
+      #      destination: input
+      #    output:
+      #      destination: output
+  kafka:
+    streams:
+      binder:
+        applicationId: email-pcs
+        configuration:
+          commit.interval.ms: 100
+          default:
+            key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+            value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+  application:
+    name: email-pcs
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+server:
+  port: 8443
+  http2:
+    enabled: true
