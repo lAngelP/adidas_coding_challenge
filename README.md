@@ -37,6 +37,7 @@ The system has the ability of performing CR(U)D requests of the 3 entities. It c
 
 ## What can be improved?
  - **Email sending**: An obvious improvement is removing the mocked service with a real one.
+ - **AVRO**: Use an schema-registry or similar tool to store the schema of the topic/s and its evolution. Also, the AVSC generation must be based of POJO as the Master Thesis linked below.
 
 ## Other useful links.
 
@@ -45,3 +46,16 @@ The system has the ability of performing CR(U)D requests of the 3 entities. It c
 
 ## How to run the component?
 Running the services is simple, you only need to run `docker compose up --detach` (MacOS) or `docker-compose up --detach` (Linux) in the root folder 
+
+## CI/CD
+![](./imgs/jenkins.png)
+Although not required, I propose a CI/CD pipeline with the following steps, similar to the image above. That image is the pipeline of my Master Thesis.
+ - Project build
+ - Project tests run
+ - Code Quality analysis (i.e. SonarQube)
+ - Docker image generation & push to registry
+ - Automatic deployment artefact generation (e.g. K8S yml)
+ - Deployment to the desired environment (Stage, PRE, PROD...)
+ - Optionally, the pipeline can send messages to a Slack channel, emails or both in case of success or error.
+
+The code of these pipelines must be stored in a repo, following the Pipelines as Code guidelines. One example is the Jenkins Templating Library, used to implement the above pipeline.
